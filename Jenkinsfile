@@ -12,7 +12,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-					sudo apt-get update && apt-get install -y nodejs npm
+					apt-get update && apt-get install -y nodejs npm
 					npm install
 					npm run build
 				'''
