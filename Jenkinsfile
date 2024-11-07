@@ -9,7 +9,7 @@ pipeline {
 	}
 	environment { 
 		DOCKER_IMAGE = 'dangnguyenful/frontend:latest' 
-		DOCKER_REGISTRY_CREDENTIALS_ID = 'docker-registry-credentials' 
+		DOCKER_REGISTRY_CREDENTIALS_ID = 'docker-id' 
 	}
     stages {
 		stage('Checkout') {
