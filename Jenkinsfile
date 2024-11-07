@@ -30,7 +30,7 @@ pipeline {
                     sh '''
 						commit_id=$(git rev-parse HEAD)
 						docker build -t frontend:$commit_id .
-						docker tag frontend:$commit_id dangnguyenful/frontend:latest
+						docker tag frontend:$commit_id dangnguyenful/frontend:$commit_id
 					'''
                 }
             }
@@ -40,7 +40,7 @@ pipeline {
                 script {
                     sh '''
 						docker.withRegistry('https://index.docker.io/v1/', DOCKER_REGISTRY_CREDENTIALS_ID) {
-							docker.image("dangnguyenful/frontend:latest").push()
+							docker push dangnguyenful/frontend:$commit_id
 						}
 					'''
                 }
