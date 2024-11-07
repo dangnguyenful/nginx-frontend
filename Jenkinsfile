@@ -39,7 +39,9 @@ pipeline {
             steps {
                 script {
                     sh '''
-						docker push dangnguyenful/frontend:$commit_id
+						docker.withRegistry('https://index.docker.io/v1/', DOCKER_REGISTRY_CREDENTIALS_ID) {
+							docker.image(dangnguyenful/frontend:$commit_id).push()
+						}
 					'''
                 }
             }
