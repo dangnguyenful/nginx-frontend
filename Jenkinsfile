@@ -29,9 +29,8 @@ pipeline {
                 script {
                     sh '''
 						commit_id=$(git rev-parse HEAD)
-						env.TAG = $commit_id
 						docker build -t frontend:$commit_id .
-						docker tag frontend:$commit_id dangnguyenful/frontend:$commit_id
+						docker tag frontend:$commit_id dangnguyenful/frontend:latest
 					'''
                 }
             }
@@ -41,7 +40,7 @@ pipeline {
                 script {
                     sh '''
 						docker.withRegistry('https://index.docker.io/v1/', DOCKER_REGISTRY_CREDENTIALS_ID) {
-							docker.image("dangnguyenful/frontend:${env.TAG}").push()
+							docker.image("dangnguyenful/frontend:latest").push()
 						}
 					'''
                 }
