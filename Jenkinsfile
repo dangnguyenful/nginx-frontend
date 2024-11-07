@@ -40,6 +40,7 @@ pipeline {
             steps {
                 script {
                     sh '''
+						commit_id=$(git rev-parse HEAD)
 						docker push dangnguyenful/frontend:$commit_id
 					'''
                 }
