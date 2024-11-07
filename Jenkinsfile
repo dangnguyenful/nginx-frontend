@@ -28,7 +28,8 @@ pipeline {
             steps {
                 script {
                     sh '''
-						docker build -t frontend:latest .
+						commit_id=$(git rev-parse HEAD)
+						docker build -t frontend:$commit_id .
 					'''
                 }
             }
