@@ -8,6 +8,7 @@ pipeline {
 		githubPush() 
 	}
 	environment {
+        DOCKER_REGISTRY = 'dangnguyenful'
 		DOCKER_REGISTRY_CREDENTIALS_ID = 'docker-id'
 	}
     stages {
@@ -16,7 +17,15 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/dangnguyenful/nginx-frontend.git'
             }
         }
-		
+		stage('Login to Docker Registry') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: DOCKER_REGISTRY_CREDENTIALS_ID, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh "echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin ${DOCKER_REGISTRY}"
+                    }
+                }
+            }
+        }
         stage('Build') {
             steps {
                 sh '''
