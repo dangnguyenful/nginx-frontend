@@ -14,9 +14,6 @@ pipeline {
 		stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/dangnguyenful/nginx-frontend.git'
-				sh '''
-					git pull
-				'''
             }
         }
         stage('Build') {
