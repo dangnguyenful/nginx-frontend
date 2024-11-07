@@ -8,8 +8,7 @@ pipeline {
 		githubPush() 
 	}
 	environment {
-		DOCKER_REGISTRY_CREDENTIALS_ID = 'docker-id' 
-		TAG = 'latest'
+		DOCKER_REGISTRY_CREDENTIALS_ID = 'docker-id'
 	}
     stages {
 		stage('Checkout') {
@@ -42,7 +41,7 @@ pipeline {
                 script {
                     sh '''
 						docker.withRegistry('https://index.docker.io/v1/', DOCKER_REGISTRY_CREDENTIALS_ID) {
-							docker.image("dangnguyenful/frontend:${TAG}").push()
+							docker.image("dangnguyenful/frontend:${env.TAG}").push()
 						}
 					'''
                 }
