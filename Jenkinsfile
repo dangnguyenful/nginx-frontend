@@ -30,7 +30,7 @@ pipeline {
                     sh '''
 						commit_id=$(git rev-parse HEAD)
 						docker build -t frontend:$commit_id .
-						docker tag frontend:$commit_id frontend:$commit_id
+						docker tag frontend:$commit_id dangnguyenful/frontend:$commit_id
 					'''
                 }
             }
@@ -39,7 +39,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-						
+						docker push dangnguyenful/frontend:$commit_id
 					'''
                 }
             }
