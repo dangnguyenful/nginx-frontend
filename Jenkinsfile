@@ -16,6 +16,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/dangnguyenful/nginx-frontend.git'
             }
         }
+		
         stage('Build') {
             steps {
                 sh '''
@@ -39,9 +40,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-						docker.withRegistry('https://index.docker.io/v1/', DOCKER_REGISTRY_CREDENTIALS_ID) {
-							docker push dangnguyenful/frontend:$commit_id
-						}
+						docker push dangnguyenful/frontend:$commit_id
 					'''
                 }
             }
