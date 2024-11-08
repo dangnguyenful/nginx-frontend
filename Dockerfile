@@ -9,6 +9,3 @@ COPY build/ build/
 
 # Your app binds to port 3000
 EXPOSE 3000
-
-# Run the web service on container startup.
-CMD [ "npx", "serve", "-s", "build" ]
