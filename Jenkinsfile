@@ -1,6 +1,8 @@
 pipeline {
     agent {
-		node any
+		node {
+            label 'react-slave'
+        }
 	}
 	triggers {
 		githubPush() 
