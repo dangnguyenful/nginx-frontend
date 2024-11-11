@@ -41,7 +41,7 @@ pipeline {
             steps {
                 script {
                     sh '''
-						commit_id=$(git rev-parse HEAD)
+						commit_id=$(git rev-parse --short HEAD)
 						docker build -t frontend:$commit_id .
 						docker tag frontend:$commit_id dangnguyenful/frontend:$commit_id
 					'''
