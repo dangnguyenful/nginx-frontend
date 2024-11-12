@@ -12,6 +12,15 @@ pipeline {
 		DOCKER_REGISTRY_CREDENTIALS_ID = 'docker-id' 
 	}
     stages {
+        stage('Login to Docker Registry') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: DOCKER_REGISTRY_CREDENTIALS_ID, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+						sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
+                    }
+                }
+            }
+        }
         stage('Checkout') {
             parallel {
                 stage('Checkout FE') {
@@ -26,15 +35,6 @@ pipeline {
                         dir('BE') {
                             git branch: 'main', url: 'https://github.com/dangnguyenful/nginx-backend.git'
                         }
-                    }
-                }
-            }
-        }
-		stage('Login to Docker Registry') {
-            steps {
-                script {
-                    withCredentials([usernamePassword(credentialsId: DOCKER_REGISTRY_CREDENTIALS_ID, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-						sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
                     }
                 }
             }
