@@ -96,7 +96,7 @@ pipeline {
                     steps {
                         dir('FE') {
                             sh '''
-                                commit_id=$(git rev-parse HEAD)
+                                commit_id=$(git rev-parse --short HEAD)
                                 docker push dangnguyenful/frontend:$commit_id
                             '''
                         }
@@ -106,7 +106,7 @@ pipeline {
                     steps {
                         dir('BE') {
                             sh '''
-                                commit_id=$(git rev-parse HEAD)
+                                commit_id=$(git rev-parse --short HEAD)
                                 docker push dangnguyenful/backend:$commit_id
                             '''
                         }
