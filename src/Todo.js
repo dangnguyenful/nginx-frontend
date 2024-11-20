@@ -6,13 +6,13 @@ const Todo = () => {
   const [newTodo, setNewTodo] = useState('');
 
   useEffect(() => {
-    axios.get('/api').then(response => {
+    axios.get('/api/todos').then(response => {
       setTodos(response.data);
     });
   }, []);
 
   const addTodo = () => {
-    axios.post('/api', { title: newTodo, completed: false })
+    axios.post('/api/todos', { title: newTodo, completed: false })
       .then(response => {
         setTodos([...todos, response.data]);
         setNewTodo('');
