@@ -6,13 +6,13 @@ const Todo = () => {
   const [newTodo, setNewTodo] = useState('');
 
   useEffect(() => {
-    axios.get('/api/todos').then(response => {
+    axios.get('/api').then(response => {
       setTodos(response.data);
     });
   }, []);
 
   const addTodo = () => {
-    axios.post('/api/todos', { title: newTodo, completed: false })
+    axios.post('/api', { title: newTodo, completed: false })
       .then(response => {
         setTodos([...todos, response.data]);
         setNewTodo('');
@@ -21,14 +21,14 @@ const Todo = () => {
 
   const toggleCompletion = id => {
     const todo = todos.find(todo => todo.id === id);
-    axios.put(`/api/todos/${id}`, { ...todo, completed: !todo.completed })
+    axios.put(`/api/${id}`, { ...todo, completed: !todo.completed })
       .then(response => {
         setTodos(todos.map(todo => todo.id === id ? response.data : todo));
       });
   };
 
   const deleteTodo = id => {
-    axios.delete(`/api/todos/${id}`)
+    axios.delete(`/api/${id}`)
       .then(() => {
         setTodos(todos.filter(todo => todo.id !== id));
       });
