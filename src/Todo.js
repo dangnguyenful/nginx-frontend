@@ -21,14 +21,14 @@ const Todo = () => {
 
   const toggleCompletion = id => {
     const todo = todos.find(todo => todo.id === id);
-    axios.put(`/api/${id}`, { ...todo, completed: !todo.completed })
+    axios.put(`/api/modify/${id}`, { ...todo, completed: !todo.completed })
       .then(response => {
         setTodos(todos.map(todo => todo.id === id ? response.data : todo));
       });
   };
 
   const deleteTodo = id => {
-    axios.delete(`/api/${id}`)
+    axios.delete(`/api/delete/${id}`)
       .then(() => {
         setTodos(todos.filter(todo => todo.id !== id));
       });
